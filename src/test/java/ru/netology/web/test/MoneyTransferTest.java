@@ -51,7 +51,7 @@ class MoneyTransferTest {
     void shouldToTransferMoneyBetweenAccountWithNegativeAmount() {
         int amount = generateValidAmount(secondCardBalance);
         var expectedBalanceSecondCard = dashboardPage.getCardBalance(1) - amount;
-        var expectedBalanceFirstCard = dashboardPage.getCardBalance(0) + amount;
+        int expectedBalanceFirstCard = dashboardPage.getCardBalance(0) + amount;
         var transMoney = dashboardPage.selectCardForTransfer(firstCardInfo);
         dashboardPage = transMoney.toTransMoney(String.valueOf(amount), secondCardInfo);
         dashboardPage.reloadDashboardPage();
@@ -62,7 +62,6 @@ class MoneyTransferTest {
                 () -> assertEquals(expectedBalanceSecondCard, actualBalanceForSecondCard)
         );
     }
-
     @Test
     void shouldBeErrorMassage() {
         int amount = generateValidAmount(secondCardBalance);
@@ -70,7 +69,6 @@ class MoneyTransferTest {
         var transMoney = dashboardPage.selectCardForTransfer(firstCardInfo);
         dashboardPage = transMoney.toTransMoney(String.valueOf(amount), thirdCardInfo);
         transMoney.findErrorMassage("Ошибка! Произошла ошибка");
-
     }
 }
 
